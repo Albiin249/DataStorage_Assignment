@@ -1,0 +1,79 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Projects\\DataStorage_Assignment\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B0A39AD0-0095-404D-AE7B-365B1FA3C658}|Business\\Business.csproj|c:\\projects\\datastorage_assignment\\business\\services\\projectservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B0A39AD0-0095-404D-AE7B-365B1FA3C658}|Business\\Business.csproj|solutionrelative:business\\services\\projectservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAAE65E8-B353-4D89-A4D1-B80EBE8A7C1A}|Data\\Data.csproj|c:\\projects\\datastorage_assignment\\data\\repositories\\baserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAAE65E8-B353-4D89-A4D1-B80EBE8A7C1A}|Data\\Data.csproj|solutionrelative:data\\repositories\\baserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0874824B-BC60-432C-985F-5FE0584771FE}|Presentation.ConsoleApp\\Presentation.ConsoleApp.csproj|c:\\projects\\datastorage_assignment\\presentation.consoleapp\\menudialogs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0874824B-BC60-432C-985F-5FE0584771FE}|Presentation.ConsoleApp\\Presentation.ConsoleApp.csproj|solutionrelative:presentation.consoleapp\\menudialogs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BaseRepository.cs",
+              "DocumentMoniker": "C:\\Projects\\DataStorage_Assignment\\Data\\Repositories\\BaseRepository.cs",
+              "RelativeDocumentMoniker": "Data\\Repositories\\BaseRepository.cs",
+              "ToolTip": "C:\\Projects\\DataStorage_Assignment\\Data\\Repositories\\BaseRepository.cs",
+              "RelativeToolTip": "Data\\Repositories\\BaseRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-18T17:25:34.999Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MenuDialogs.cs",
+              "DocumentMoniker": "C:\\Projects\\DataStorage_Assignment\\Presentation.ConsoleApp\\MenuDialogs.cs",
+              "RelativeDocumentMoniker": "Presentation.ConsoleApp\\MenuDialogs.cs",
+              "ToolTip": "C:\\Projects\\DataStorage_Assignment\\Presentation.ConsoleApp\\MenuDialogs.cs",
+              "RelativeToolTip": "Presentation.ConsoleApp\\MenuDialogs.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-18T16:10:03.787Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ProjectService.cs",
+              "DocumentMoniker": "C:\\Projects\\DataStorage_Assignment\\Business\\Services\\ProjectService.cs",
+              "RelativeDocumentMoniker": "Business\\Services\\ProjectService.cs",
+              "ToolTip": "C:\\Projects\\DataStorage_Assignment\\Business\\Services\\ProjectService.cs",
+              "RelativeToolTip": "Business\\Services\\ProjectService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-18T17:35:47.046Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
