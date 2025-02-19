@@ -14,12 +14,22 @@ public class UserService(UserRepository userRepository) : IUserService
     //CREATE
     public async Task CreateUserAsync(User userModel)
     {
-        var existingUser = await _userRepository.GetAsync(x => x.Email == userModel.Email);
-        if (existingUser != null)
-            throw new Exception("User with this Email does already exist.");
+        await _userRepository.BeginTransactionAsync();
+        try
+        {
+            var existingUser = await _userRepository.GetAsync(x => x.Email == userModel.Email);
+            if (existingUser != null)
+                throw new Exception("User with this Email does already exist.");
 
-        var userEntity = UserFactory.Create(userModel);
-        await _userRepository.CreateASync(userEntity!);
+            var userEntity = UserFactory.Create(userModel);
+            await _userRepository.CreateASync(userEntity!);
+            await _userRepository.CommitTransactionAsync();
+        }
+        catch
+        {
+            await _userRepository.RollBackTransactionAsync();
+        }
+        
     }
 
     //READ
@@ -38,19 +48,45 @@ public class UserService(UserRepository userRepository) : IUserService
     //UPDATE
     public async Task<User?> UpdateUserAsync(User user)
     {
-        var updatedEntity = await _userRepository.UpdateAsync(
-            u => u.Id == user.Id,
-            UserFactory.Create(user)!
-        );
+        await _userRepository.BeginTransactionAsync();
+        try
+        {
+            var updatedEntity = await _userRepository.UpdateAsync(
+                u => u.Id == user.Id,
+                UserFactory.Create(user)!
+            );
+            if (updatedEntity == null)
+                return null;
 
-        return updatedEntity != null ? UserFactory.Create(updatedEntity) : null;
+            await _userRepository.CommitTransactionAsync();
+            return UserFactory.Create(updatedEntity);
+        }
+        catch
+        {
+            await _userRepository.RollBackTransactionAsync();
+            throw;
+        }
+        
     }
 
     //DELETE
     public async Task<bool> DeleteUserAsync(int id)
     {
-        var result = await _userRepository.DeleteAsync(x => x.Id == id);
-        return result;
+        await _userRepository.BeginTransactionAsync();
+        try
+        {
+            var result = await _userRepository.DeleteAsync(x => x.Id == id);
+            if (!result) 
+                return false;
+            await _userRepository.CommitTransactionAsync();
+            return result;
+        }
+        catch
+        {
+            await _userRepository.RollBackTransactionAsync();
+            throw;
+        }
+        
     }
 
     //EXISTS

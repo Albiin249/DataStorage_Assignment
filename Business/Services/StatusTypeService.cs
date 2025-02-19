@@ -2,7 +2,6 @@
 using Business.Interfaces;
 using Business.Models;
 using Data.Entities;
-using Data.Interfaces;
 using Data.Repositories;
 using System.Linq.Expressions;
 
@@ -16,12 +15,23 @@ public class StatusTypeService(StatusTypeRepository repository) : IStatusTypeSer
     //CREATE
     public async Task CreateStatusAsync(StatusType statusModel)
     {
-        var existingStatus = await _statusRepository.GetAsync(x => x.StatusName == statusModel.StatusName);
-        if (existingStatus != null)
-            throw new Exception("This status already exists.");
+        await _statusRepository.BeginTransactionAsync();
+        try
+        {
+            var existingStatus = await _statusRepository.GetAsync(x => x.StatusName == statusModel.StatusName);
+            if (existingStatus != null)
+                throw new Exception("This status already exists.");
 
-        var statusEntity = StatusTypeFactory.Create(statusModel);
-        await _statusRepository.CreateASync(statusEntity!);
+            var statusEntity = StatusTypeFactory.Create(statusModel);
+            await _statusRepository.CreateASync(statusEntity!);
+            await _statusRepository.CommitTransactionAsync();
+        }
+        catch 
+        {
+            await _statusRepository.RollBackTransactionAsync();
+        }
+
+        
     }
 
     //READ
@@ -40,19 +50,46 @@ public class StatusTypeService(StatusTypeRepository repository) : IStatusTypeSer
     //UPDATE
     public async Task<StatusType?> UpdateStatusTypeAsync(StatusType status)
     {
-        var updatedEntity = await _statusRepository.UpdateAsync(
-            s => s.Id == status.Id,
-            StatusTypeFactory.Create(status)!
-        );
+        await _statusRepository.BeginTransactionAsync();
 
-        return updatedEntity != null ? StatusTypeFactory.Create(updatedEntity) : null;
+        try
+        {
+            var updatedEntity = await _statusRepository.UpdateAsync(
+                 s => s.Id == status.Id,
+                 StatusTypeFactory.Create(status)!
+            );
+
+            if (updatedEntity == null)
+                return null;
+
+            await _statusRepository.CommitTransactionAsync();
+            return StatusTypeFactory.Create(updatedEntity);
+        }
+        catch
+        {
+            await _statusRepository.RollBackTransactionAsync();
+            throw;
+        }
+        
     }
 
     //DELETE
     public async Task<bool> DeleteStatusTypeAsync(int id)
     {
-        var result = await _statusRepository.DeleteAsync(x => x.Id == id);
-        return result;
+        await _statusRepository.CommitTransactionAsync();
+        try
+        {
+            var result = await _statusRepository.DeleteAsync(x => x.Id == id);
+            if (!result) 
+                return false;
+            await _statusRepository.CommitTransactionAsync();
+            return result;
+        }
+        catch
+        {
+            await _statusRepository.RollBackTransactionAsync();
+            throw;
+        }
     }
 
     //EXISTS

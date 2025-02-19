@@ -15,13 +15,25 @@ public class ProjectService(ProjectRepository repository, ProjectFactory _projec
     //CREATE
     public async Task CreateProjectAsync(Project projectModel)
     {
-        
-        var existingProject = await _projectRepository.GetAsync(x => x.Title == projectModel.Title);
-        if (existingProject != null)
-            throw new Exception("Project with this title already exists.");
 
-        var projectEntity = _projectFactory.Create(projectModel);
-        await _projectRepository.CreateASync(projectEntity!);
+        await _projectRepository.BeginTransactionAsync();
+
+        try
+        {
+            var existingProject = await _projectRepository.GetAsync(x => x.Title == projectModel.Title);
+            if (existingProject != null)
+                throw new Exception("Project with this title already exists.");
+
+            var projectEntity = _projectFactory.Create(projectModel);
+            await _projectRepository.CreateASync(projectEntity!);
+            await _projectRepository.CommitTransactionAsync();
+        }
+        catch 
+        {
+            await _projectRepository.RollBackTransactionAsync();
+        }
+        
+        
     }
 
     //READ
@@ -40,19 +52,47 @@ public class ProjectService(ProjectRepository repository, ProjectFactory _projec
     //UPDATE
     public async Task<Project?> UpdateProjectAsync(Project project)
     {
-        var updatedEntity = await _projectRepository.UpdateAsync(
-            p => p.Id == project.Id,
-            _projectFactory.Create(project)!
-        );
+        await _projectRepository.BeginTransactionAsync();
 
-        return updatedEntity != null ? _projectFactory.Create(updatedEntity) : null;
+        try
+        {
+            var updatedEntity = await _projectRepository.UpdateAsync(
+                p => p.Id == project.Id,
+                _projectFactory.Create(project)!
+            );
+            if (updatedEntity == null)
+                return null;
+
+            await _projectRepository.CommitTransactionAsync();
+            return _projectFactory.Create(updatedEntity);
+        }
+        catch
+        {
+            await _projectRepository.RollBackTransactionAsync();
+            throw;
+        }
+        
     }
 
     //DELETE
     public async Task<bool> DeleteProjectAsync(int id)
     {
-        var result = await _projectRepository.DeleteAsync(x => x.Id == id);
-        return result;
+        await _projectRepository.BeginTransactionAsync();
+        try
+        {
+            var result = await _projectRepository.DeleteAsync(x => x.Id == id);
+            if (!result) 
+                return false;
+
+            await _projectRepository.CommitTransactionAsync();
+            return result;
+        }
+        catch
+        {
+            await _projectRepository.RollBackTransactionAsync();
+            throw;
+        }
+        
     }
 
     //ALREADY EXISTS

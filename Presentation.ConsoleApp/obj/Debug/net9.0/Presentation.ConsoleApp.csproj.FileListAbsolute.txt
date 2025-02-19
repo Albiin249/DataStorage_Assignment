@@ -150,3 +150,4 @@ C:\Projects\DataStorage_Assignment\Presentation.ConsoleApp\obj\Debug\net9.0\refi
 C:\Projects\DataStorage_Assignment\Presentation.ConsoleApp\obj\Debug\net9.0\Presentation.ConsoleApp.pdb
 C:\Projects\DataStorage_Assignment\Presentation.ConsoleApp\obj\Debug\net9.0\Presentation.ConsoleApp.genruntimeconfig.cache
 C:\Projects\DataStorage_Assignment\Presentation.ConsoleApp\obj\Debug\net9.0\ref\Presentation.ConsoleApp.dll
+C:\Projects\DataStorage_Assignment\Presentation.ConsoleApp\obj\Debug\net9.0\Presentation.ConsoleApp.sourcelink.json

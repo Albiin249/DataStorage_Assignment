@@ -1,6 +1,7 @@
 ﻿using Business.Helpers;
 using Business.Models;
 using Business.Services;
+using Data.Migrations;
 using System.Text.RegularExpressions;
 
 namespace Presentation.ConsoleApp;
@@ -111,7 +112,6 @@ public class MenuDialogs(CustomerService customerService, ProductService product
     //METHODS FOR CREATEMENU
     #region MethodsForCreateMenu
     
-
     private async Task CreateProject()
     {
         {
@@ -347,31 +347,59 @@ public class MenuDialogs(CustomerService customerService, ProductService product
     {
         Console.Clear();
         Console.WriteLine("--- Create New User ---");
-        Console.Write("Enter user first name: ");
-        var userFirstName = Console.ReadLine();
-
-        if (string.IsNullOrWhiteSpace(userFirstName))
+        
+        string userFirstName;
+        while (true)
         {
+            Console.Write("Enter user first name (or enter 'X' to go back): ");
+            userFirstName = Console.ReadLine()!;
+
+            if(userFirstName.ToUpper() == "X")
+            {
+                return;
+            }
+            if (!string.IsNullOrWhiteSpace(userFirstName))
+            {
+                break;
+            }
+
             Console.WriteLine("First name cannot be empty. Please try again.");
-            return;
         }
 
-        Console.Write("Enter user last name: ");
-        var userLastName = Console.ReadLine();
-
-        if (string.IsNullOrWhiteSpace(userLastName))
+        string userLastName;
+        while(true)
         {
+            Console.Write("Enter user last name (or enter 'X' to go back): ");
+            userLastName = Console.ReadLine()!;
+            if (userLastName.ToUpper() == "X")
+            {
+                return;
+            }
+            if (!string.IsNullOrWhiteSpace(userLastName))
+            {
+                break;
+            }
+
             Console.WriteLine("Last name cannot be empty. Please try again.");
-            return;
         }
+        
+        string userEmail;
+        string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$"; //Tog hjälp av ChatGPT för att skapa denna Regex för email-validering.
 
-        Console.Write("Enter user email: ");
-        var userEmail = Console.ReadLine();
-
-        if (string.IsNullOrWhiteSpace(userEmail))
+        while (true)
         {
-            Console.WriteLine("Email cannot be empty. Please try again.");
-            return;
+            Console.Write("Enter user email (or enter 'X' to go back): ");
+            userEmail = Console.ReadLine()!;
+            if (userEmail.ToUpper() == "X")
+            {
+                return;
+            }
+            if (!string.IsNullOrWhiteSpace(userEmail) && Regex.IsMatch(userEmail, emailPattern)) //Tog hjälp av ChatGPT här. Koden kollar så att emailen inte är tom och uppfyller regexens krav.
+            {
+                break; // Om e-postadressen är giltig, bryt loopen och fortsätt
+            }
+
+            Console.WriteLine("Invalid email format. Please try again.");
         }
 
         try
@@ -518,45 +546,200 @@ public class MenuDialogs(CustomerService customerService, ProductService product
     {
         Console.Clear();
         Console.WriteLine("----UPDATE PROJECT----");
-        Console.Write("Enter the ID of the project you want to update: ");
-        if (!int.TryParse(Console.ReadLine(), out int projectId) || projectId <= 0) //Tog hjälp av ChatGPT här. Koden läser in användarens inmatning.
-        {                                                                           //Om användaren ej skriver ett heltal, kommer det bli true och felmeddelandet skrivs ut.
-            Console.WriteLine("Invalid Project ID. Please enter a valid positive number.");
-            return;
-        }
-
-        var project = await _projectService.GetProjectAsync(p => p.Id == projectId);
-        if (project == null)
+        var projects = await _projectService.GetAllProjectsAsync();
+        foreach (var eproject in projects)
         {
-            Console.WriteLine($"Product with {projectId} not found.");
-            return;
+            Console.WriteLine($"ID: {eproject.Id}, Title: {eproject.Title}");
         }
 
-        Console.Write("Enter new project title: (leave this field empty to keep current title)");
+        Project project = null; //Tog hjälp av ChatGPT här för att kunna använda project efter while loopen också.
+
+        while (true)
+        {
+            Console.Write("Enter the ID of the project you want to update (or enter 'X' to exit): ");
+            var input = Console.ReadLine();
+            if (input.ToUpper() == "X")
+            {
+                return;
+            }
+
+            if (!int.TryParse(input, out int projectId))
+            {
+                Console.WriteLine("Invalid input. Please enter a valid Project ID.");
+                continue;
+            }
+
+            project = await _projectService.GetProjectAsync(p => p.Id == projectId);
+            if (project == null)
+            {
+                Console.WriteLine($"No Project with ID {projectId}. Please try again.");
+                continue;
+            }
+
+            break;
+        }
+
+        
+
+        Console.Write("\nEnter new project title (leave empty to keep current title): ");
         var newProjectTitle = Console.ReadLine();
         if (!string.IsNullOrWhiteSpace(newProjectTitle))
         {
             project.Title = newProjectTitle;
         }
 
-        Console.Write("Enter new description (optional): ");
+        Console.Write("\nEnter new description (optional): ");
         project.Description = Console.ReadLine();
 
-        Console.Write("Enter new start date (yyyy-mm-dd): ");
-        if (!DateTime.TryParse(Console.ReadLine(), out DateTime startDate))
+        Console.WriteLine($"\nCurrent start date: {project.StartDate}");
+        DateTime startDate;
+        while (true)
         {
+            Console.Write("Enter new start date (yyyy-mm-dd) (or enter 'X' to exit): ");
+            var input = Console.ReadLine();
+
+            if (input.ToUpper() == "X")
+            {
+                return;
+            }
+            if (DateTime.TryParse(input, out startDate))
+            {
+                break;
+            }
             Console.WriteLine("Invalid date format. Please try again.");
-            return;
+
         }
         project.StartDate = startDate;
 
-        Console.Write("Enter new end date (yyyy-mm-dd): ");
-        if (!DateTime.TryParse(Console.ReadLine(), out DateTime endDate))
+
+        Console.WriteLine($"\nCurrent end date: {project.EndDate}");
+        DateTime endDate;
+        while (true)
         {
+            Console.Write("Enter new end date (yyyy-mm-dd) (or enter 'X' to exit): ");
+            var input = Console.ReadLine();
+
+            if (input.ToUpper() == "X")
+            {
+                return;
+            }
+            if (DateTime.TryParse(input, out endDate))
+            {
+                break;
+            }
             Console.WriteLine("Invalid date format. Please try again.");
-            return;
+
         }
         project.EndDate = endDate;
+
+        Console.WriteLine($"\nCurrent Customer ID: {project.CustomerId}");
+        while (true)
+        {
+            Console.Write("Enter new Customer ID (or enter 'X' to exit): ");
+            var input = Console.ReadLine();
+            if (input.ToUpper() == "X")
+            {
+                return;
+            }
+
+            if (!int.TryParse(input, out int customerId))
+            {
+                Console.WriteLine("Invalid input. Please enter a valid Customer ID.");
+                continue;
+            }
+
+            var customer = await _customerService.GetCustomerAsync(c => c.Id == customerId);
+            if (customer == null)
+            {
+                Console.WriteLine($"No customer with ID {customerId}. Please try again.");
+                continue;
+            }
+
+            project.CustomerId = customerId;
+            break;
+        }
+
+        Console.WriteLine($"\nCurrent Status ID: {project.StatusId}");
+        while (true)
+        {
+            Console.Write("Enter new Status ID (or enter 'X' to exit): ");
+            var input = Console.ReadLine();
+            if (input.ToUpper() == "X")
+            {
+                return;
+            }
+
+            if (!int.TryParse(input, out int statusId))
+            {
+                Console.WriteLine("Invalid input. Please enter a valid Status ID.");
+                continue;
+            }
+
+            var status = await _statusTypeService.GetStatusTypeAsync(s => s.Id == statusId);
+            if (status == null)
+            {
+                Console.WriteLine($"No Status with ID {statusId}. Please try again.");
+                continue;
+            }
+
+            project.StatusId = statusId;
+            break;
+        }
+
+        Console.WriteLine($"\nCurrent User ID: {project.UserId}");
+        while (true)
+        {
+            Console.Write("Enter new User ID (or enter 'X' to exit): ");
+            var input = Console.ReadLine();
+            if (input.ToUpper() == "X")
+            {
+                return;
+            }
+
+            if (!int.TryParse(input, out int userId))
+            {
+                Console.WriteLine("Invalid input. Please enter a valid User ID.");
+                continue;
+            }
+
+            var user = await _userService.GetUserAsync(u => u.Id == userId);
+            if (user == null)
+            {
+                Console.WriteLine($"No User with ID {userId}. Please try again.");
+                continue;
+            }
+
+            project.UserId = userId;
+            break;
+        }
+
+        Console.WriteLine($"\nCurrent Service ID: {project.ProductId}");
+        while (true)
+        {
+            Console.Write("Enter new Service ID (or enter 'X' to exit): ");
+            var input = Console.ReadLine();
+            if (input.ToUpper() == "X")
+            {
+                return;
+            }
+
+            if (!int.TryParse(input, out int productId))
+            {
+                Console.WriteLine("Invalid input. Please enter a valid Service ID.");
+                continue;
+            }
+
+            var product = await _productService.GetProductAsync(p => p.Id == productId);
+            if (product == null)
+            {
+                Console.WriteLine($"No Service with ID {productId}. Please try again.");
+                continue;
+            }
+
+            project.ProductId = productId;
+            break;
+        }
+
 
         try
         {
@@ -571,6 +754,9 @@ public class MenuDialogs(CustomerService customerService, ProductService product
         {
             Console.WriteLine($"Error updating project. \nError: {ex.Message}");
         }
+
+
+        Console.ReadKey();
 
 
     }
@@ -790,9 +976,8 @@ public class MenuDialogs(CustomerService customerService, ProductService product
             Console.WriteLine("---------SHOW MENU---------");
             Console.WriteLine("1. Show All Customers");
             Console.WriteLine("2. Show All Projects");
-            Console.WriteLine("3. Show Customer");
-            Console.WriteLine("4. Show Project");
-            Console.WriteLine("5. Back to Main Menu");
+            Console.WriteLine("3. Show Project Details");
+            Console.WriteLine("4. Back to Main Menu");
             Console.WriteLine("---------------------------");
             Console.WriteLine();
             Console.Write("Please choose an option: ");
@@ -807,12 +992,9 @@ public class MenuDialogs(CustomerService customerService, ProductService product
                     await ViewAllProjects();
                     break;
                 case "3":
-                    await ViewCustomer();
-                    break;
-                case "4":
                     await ViewProject();
                     break;
-                case "5":
+                case "4":
                     exit = true;
                     break;
                 default:
@@ -842,7 +1024,7 @@ public class MenuDialogs(CustomerService customerService, ProductService product
         foreach (var customer in customers)
         {
             Console.WriteLine($"ID: {customer.Id} - Name: {customer.CustomerName}");
-            Console.WriteLine("------------------");
+            Console.WriteLine("-----------------------");
         }
 
         Console.WriteLine("Press any key to return to main menu.");
@@ -880,40 +1062,18 @@ public class MenuDialogs(CustomerService customerService, ProductService product
         Console.ReadKey();
     }
   
-    private async Task ViewCustomer()
-    {
-        Console.Clear();
-        Console.WriteLine("---- VIEW CUSTOMER ----");
-
-        Console.Write("Please enter Customer ID: ");
-        if (!int.TryParse(Console.ReadLine(), out int customerId) || customerId <= 0) 
-        {
-            Console.WriteLine("Invalid Customer ID. Please enter a valid positive number.");
-            return;
-        }
-
-        var customer = await _customerService.GetCustomerAsync(c => c.Id == customerId);
-
-        if (customer == null)
-        {
-            Console.WriteLine($"Could not find the customer with ID: {customerId}");
-            return;
-        }
-
-        Console.WriteLine($"Customer ID: {customer.Id}");
-        Console.WriteLine($"Customer Name: {customer.CustomerName}");
-
-        Console.WriteLine("Please press any key to return to the menu.");
-        Console.ReadKey();
-
-    }
-  
     private async Task ViewProject()
     {
         Console.Clear();
         Console.WriteLine("---- VIEW PROJECT ----");
 
-        Console.Write("Please enter Project ID: ");
+        var projects = await _projectService.GetAllProjectsAsync();
+        foreach (var eproject in projects)
+        {
+            Console.WriteLine($"ID: {eproject.Id}, Title: {eproject.Title}");
+        }
+
+        Console.Write("\nPlease enter Project ID: ");
         if (!int.TryParse(Console.ReadLine(), out int projectId) || projectId <= 0)
         {
             Console.WriteLine("Invalid Project ID. Please enter a valid positive number.");
@@ -928,13 +1088,25 @@ public class MenuDialogs(CustomerService customerService, ProductService product
             return;
         }
 
-        Console.WriteLine($"Project ID: {project.Id}");
+        var user = await _userService.GetUserAsync(u => u.Id == project.UserId);
+        var product = await _productService.GetProductAsync(p => p.Id == project.ProductId);
+        var status = await _statusTypeService.GetStatusTypeAsync(s => s.Id == project.StatusId);
+        var customer = await _customerService.GetCustomerAsync(c => c.Id == project.CustomerId);
+
+        Console.WriteLine($"\nProject ID: {project.Id}");
+        Console.WriteLine($"Project Number: {project.ProjectNumber}");
         Console.WriteLine($"Project Title: {project.Title}");
         Console.WriteLine($"Project Description: {project.Description}");
+        Console.WriteLine($"Project Customer: {customer.CustomerName}");
+        Console.WriteLine($"Project Service: {product.ProductName}");
+        Console.WriteLine($"Project Manager: {user.FirstName} {user.LastName}");
+        Console.WriteLine($"Project Status: {status.StatusName}");
         Console.WriteLine($"Project Start date: {project.StartDate}");
         Console.WriteLine($"Project End date: {project.EndDate}");
 
-        Console.WriteLine("Please press any key to return to the menu.");
+
+
+        Console.WriteLine("\nPlease press any key to return to the menu.");
         Console.ReadKey();
     }
 
@@ -1063,7 +1235,12 @@ public class MenuDialogs(CustomerService customerService, ProductService product
         while (true)
         {
             Console.WriteLine("---- DELETE CUSTOMER ----");
-            ViewAllCustomers();
+            var customers = await _customerService.GetAllCustomersAsync();
+
+            foreach (var customer in customers)
+            {
+                Console.WriteLine($"ID: {customer.Id} - Name: {customer.CustomerName}");
+            }
 
             Console.Write("\nPlease enter the ID of which customer you want to delete ('X' to go back): ");
             var input = Console.ReadLine();

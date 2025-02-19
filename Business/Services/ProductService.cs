@@ -14,12 +14,22 @@ public class ProductService(ProductRepository repository) : IProductService
     //CREATE
     public async Task CreateProductAsync(Product productModel)
     {
-        var existingProduct = await _productRepository.GetAsync(x => x.ProductName == productModel.ProductName);
-        if (existingProduct != null)
-            throw new Exception("Product with this name already exists.");
+        await _productRepository.BeginTransactionAsync();
+        try
+        {
+            var existingProduct = await _productRepository.GetAsync(x => x.ProductName == productModel.ProductName);
+            if (existingProduct != null)
+                throw new Exception("Product with this name already exists.");
 
-        var productEntity = ProductFactory.Create(productModel);
-        await _productRepository.CreateASync(productEntity!);
+            var productEntity = ProductFactory.Create(productModel);
+            await _productRepository.CreateASync(productEntity!);
+            await _productRepository.CommitTransactionAsync();
+        }
+        catch 
+        { 
+            await _productRepository.RollBackTransactionAsync();
+        }
+        
     }
 
     //READ
@@ -38,19 +48,48 @@ public class ProductService(ProductRepository repository) : IProductService
     //UPDATE
     public async Task<Product?> UpdateProductAsync(Product product)
     {
-        var updatedEntity = await _productRepository.UpdateAsync(
-            p => p.Id == product.Id,
-            ProductFactory.Create(product)!
-        );
 
-        return updatedEntity != null ? ProductFactory.Create(updatedEntity) : null;
+        await _productRepository.BeginTransactionAsync();
+        try
+        {
+            var updatedEntity = await _productRepository.UpdateAsync(
+                p => p.Id == product.Id,
+                ProductFactory.Create(product)!
+            );
+
+            if (updatedEntity == null)
+                return null;
+            await _productRepository.CommitTransactionAsync();
+            return ProductFactory.Create(updatedEntity);
+        }
+        catch
+        {
+            await _productRepository.RollBackTransactionAsync();
+            throw;
+        }
+        
     }
 
     //DELETE
     public async Task<bool> DeleteProductAsync(int id)
     {
-        var result = await _productRepository.DeleteAsync(x => x.Id == id);
-        return result;
+        await _productRepository.BeginTransactionAsync();
+        try
+        {
+            var result = await _productRepository.DeleteAsync(x => x.Id == id);
+
+            if (!result) 
+                return false;
+
+            await _productRepository.CommitTransactionAsync();
+            return result;
+        }
+        catch
+        {
+            await _productRepository.RollBackTransactionAsync();
+            throw;
+        }
+        
     }
 
     //ALREADY EXISTS
