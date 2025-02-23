@@ -53,7 +53,7 @@ const ProjectDetails = () => {
             <p><span className="bold-text">Project Manager: </span> {users.find(u => u.id === projectData?.userId)?.firstName} {users.find(u => u.id === projectData?.userId)?.lastName ?? "N/A"}</p>
             <p><span className="bold-text">Customer: </span>{customers.find(c => c.id === projectData?.customerId)?.customerName ?? "N/A"}</p>
             <p><span className="bold-text">Service: </span>{products.find(p => p.id === projectData?.productId)?.productName ?? "N/A"}</p>
-
+            <p><span className="bold-text">TotalPrice: </span>{projectData?.totalPrice ?? "N/A"}</p>
 
             <button onClick={() => navigate("/")} className="btn">Back to main page</button> 
         </div>

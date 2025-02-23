@@ -8,6 +8,7 @@ public class ProjectFactory(ProjectNumberGenerator projectNumberGenerator)
 {
     private readonly ProjectNumberGenerator _projectNumberGenerator = projectNumberGenerator;
 
+   
     //Från ProjectModel till Entity
     public ProjectEntity? Create(Project model) => model == null ? null : new()
     {
@@ -21,6 +22,8 @@ public class ProjectFactory(ProjectNumberGenerator projectNumberGenerator)
         StatusId = model.StatusId,
         UserId = model.UserId,
         ProductId = model.ProductId,
+        TotalHours = model.TotalHours,
+        TotalPrice = model.TotalPrice
     };
 
     //Från ProjectEntity till Model
@@ -35,6 +38,8 @@ public class ProjectFactory(ProjectNumberGenerator projectNumberGenerator)
         CustomerId = entity.CustomerId,
         StatusId = entity.StatusId,
         UserId = entity.UserId,
-        ProductId = entity.ProductId
+        ProductId = entity.ProductId,
+        TotalHours = entity.TotalHours,
+        TotalPrice = entity.TotalPrice
     };
 }

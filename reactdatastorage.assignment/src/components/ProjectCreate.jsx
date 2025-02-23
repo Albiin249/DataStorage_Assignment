@@ -12,6 +12,7 @@ const ProjectCreate = () => {
         userId: "",
         productId: "",
         projectNumber: "",
+        totalHours: "",
     });
     //Tog hjälp utav ChatGPT för att hämta varje kund, status, produkt och user för att ha i dropdown vid create. Kommentarer kommer på den kod som är tagen från ChatGPT.
 
@@ -154,6 +155,14 @@ const ProjectCreate = () => {
                             </option>
                         ))}
                     </select>
+                    <input
+                        type="number"
+                        className="input"
+                        name="totalHours"
+                        placeholder="Total Hours"
+                        value={projectData.totalHours}
+                        onChange={handleInputChange}
+                    />
 
                     {errorMessage && <p className="error-message">{errorMessage}</p>} {/*Skickar ut felmeddelandet*/}
                     <button className="btn btn-create" type="submit">Create Project</button>

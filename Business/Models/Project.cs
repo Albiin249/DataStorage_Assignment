@@ -8,6 +8,8 @@ public class Project
     public string ProjectNumber { get; set; } = null!;
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
+    public int TotalHours { get; set; }
+    public Decimal TotalPrice { get; set; }
 
     public int CustomerId { get; set; }
     public int StatusId { get; set; }

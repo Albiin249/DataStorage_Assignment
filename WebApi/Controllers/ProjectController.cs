@@ -1,4 +1,6 @@
-﻿using Business.Interfaces;
+﻿using Business.Factories;
+using Business.Helpers;
+using Business.Interfaces;
 using Business.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,14 +8,15 @@ namespace WebApi.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class ProjectController(IProjectService projectService, ICustomerService customerService, IStatusTypeService statusTypeService, IProductService productService, IUserService userService) : ControllerBase
+public class ProjectController(IProjectService projectService, ICustomerService customerService, IStatusTypeService statusTypeService, IProductService productService, IUserService userService, ProjectFactory projectFactory, CalculatePrice calculatePrice) : ControllerBase
 {
     private readonly IProjectService _projectService = projectService;
     private readonly ICustomerService _customerService = customerService;
     private readonly IStatusTypeService _statusTypeService = statusTypeService;
     private readonly IProductService _productService = productService;
     private readonly IUserService _userService = userService;
-
+    private readonly ProjectFactory _projectFactory = projectFactory;
+    private readonly CalculatePrice _calculatePrice = calculatePrice;
     //GET 
     #region HTTPGET
     [HttpGet("projects")]
@@ -89,6 +92,7 @@ public class ProjectController(IProjectService projectService, ICustomerService 
             return StatusCode(500, $"Error: {ex.Message}");
         }
     }
+
 
     [HttpPost("users")]
     public async Task<IActionResult> CreateUser([FromBody] User userModel) 
@@ -196,13 +200,14 @@ public class ProjectController(IProjectService projectService, ICustomerService 
         //Här uppdateras enbart de fält som skickats med.
         existingProject.Title = updatedProject.Title ?? existingProject.Title;
         existingProject.Description = updatedProject.Description ?? existingProject.Description;
+        existingProject.TotalHours = updatedProject.TotalHours;
         existingProject.StartDate = updatedProject.StartDate != DateTime.MinValue ? updatedProject.StartDate : existingProject.StartDate;
         existingProject.EndDate = updatedProject.EndDate != DateTime.MinValue ? updatedProject.EndDate : existingProject.EndDate;
         existingProject.CustomerId = updatedProject.CustomerId != 0 ? updatedProject.CustomerId : existingProject.CustomerId;
         existingProject.StatusId = updatedProject.StatusId != 0 ? updatedProject.StatusId : existingProject.StatusId;
         existingProject.UserId = updatedProject.UserId != 0 ? updatedProject.UserId : existingProject.UserId;
         existingProject.ProductId = updatedProject.ProductId != 0 ? updatedProject.ProductId : existingProject.ProductId;
-
+        
         //Försöker uppdatera projektet med min service.
         try
         {

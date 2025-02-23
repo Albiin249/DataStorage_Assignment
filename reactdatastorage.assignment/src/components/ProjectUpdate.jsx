@@ -17,6 +17,7 @@ const UpdateProject = () => {
         userId: "",
         productId: "",
         projectNumber: "",
+        totalHours: "",
     });
 
     const [customers, setCustomers] = useState([]);
@@ -148,7 +149,8 @@ const UpdateProject = () => {
                         </option>
                     ))}
                 </select>
-
+                <p className="input-title">Total Hours</p>
+                <input className="input" type="number" name="totalHours" value={projectData.totalHours} onChange={handleInputChange} required />
                 <button className="btn btn-back" type="submit">Update Project</button>
                 <button onClick={() => navigate("/")} className="btn btn-back">Back to main page</button> 
             </form>

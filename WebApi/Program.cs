@@ -27,6 +27,7 @@ builder.Services.AddScoped<IStatusTypeService, StatusTypeService>();
 builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddScoped<ProjectFactory>();
+builder.Services.AddScoped<CalculatePrice>();
 builder.Services.AddScoped<ProjectNumberGenerator>();
 var app = builder.Build();
 app.MapOpenApi();
