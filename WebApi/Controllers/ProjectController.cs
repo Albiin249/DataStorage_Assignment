@@ -3,6 +3,7 @@ using Business.Helpers;
 using Business.Interfaces;
 using Business.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 namespace WebApi.Controllers;
 
@@ -67,6 +68,60 @@ public class ProjectController(IProjectService projectService, ICustomerService 
         return Ok(project);
     }
 
+    [HttpGet("users/{id}")]
+    public async Task<ActionResult<User>> GetUser(int id)
+    {
+        var user = await _userService.GetUserAsync(u => u.Id == id);
+
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(user);
+    }
+
+    [HttpGet("customers/{id}")]
+    public async Task<ActionResult<User>> GetCustomer(int id)
+    {
+        var customer = await _customerService.GetCustomerAsync(c => c.Id == id);
+
+        if (customer == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(customer);
+    }
+
+    [HttpGet("status/{id}")]
+    public async Task<ActionResult<StatusType>> GetStatus(int id)
+    {
+        var status = await _statusTypeService.GetStatusTypeAsync(s => s.Id == id);
+
+        if (status == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(status);
+    }
+
+    [HttpGet("services/{id}")]
+    public async Task<ActionResult<Product>> GetProducts(int id)
+    {
+        var status = await _productService.GetProductAsync(p => p.Id == id);
+
+        if (status == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(status);
+    }
+
+
+
     #endregion
 
     //POST
@@ -97,6 +152,14 @@ public class ProjectController(IProjectService projectService, ICustomerService 
     [HttpPost("users")]
     public async Task<IActionResult> CreateUser([FromBody] User userModel) 
     {
+        //Tog hjälp av ChatGPT för att skapa denna email regexen för validering utav email.
+        var emailRegex = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+        if (!Regex.IsMatch(userModel.Email, emailRegex))
+        {
+            ModelState.AddModelError("Email", "Please enter a valid email address.");
+            return BadRequest(ModelState);
+        }
+
         var existingUser = await _userService.CheckIfUserExists(u => u.Email == userModel.Email);
         if (existingUser)
         {
@@ -244,5 +307,88 @@ public class ProjectController(IProjectService projectService, ICustomerService 
             return StatusCode(500, new { message = ex.Message });
         }
     }
+
+    //Tog hjälp utav ChatGPT för att få detta att funka. [HttpDelete("users/{id}")] HttpDelete anger att controllern ska hantera Delete begärningar.
+    //users/id är URLen som metoden kommer att hantera.
+    [HttpDelete("users/{id}")]
+    public async Task<IActionResult> DeleteUser(int id)
+    {
+        try
+        {
+            var success = await _userService.DeleteUserAsync(id);
+
+            if (!success)
+            {
+                return NotFound(new { message = "User was not deleted." });
+            }
+
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { message = ex.Message });
+        }
+    }
+
+    [HttpDelete("customers/{id}")]
+    public async Task<IActionResult> DeleteCustomer(int id)
+    {
+        try
+        {
+            var success = await _customerService.DeleteCustomerAsync(id);
+
+            if (!success)
+            {
+                return NotFound(new { message = "Customer was not deleted." });
+            }
+
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { message = ex.Message });
+        }
+    }
+
+    [HttpDelete("status/{id}")]
+    public async Task<IActionResult> DeleteStatus(int id)
+    {
+        try
+        {
+            var success = await _statusTypeService.DeleteStatusTypeAsync(id);
+
+            if (!success)
+            {
+                return NotFound(new { message = "Status was not deleted." });
+            }
+
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { message = ex.Message });
+        }
+    }
+
+    [HttpDelete("services/{id}")]
+    public async Task<IActionResult> DeleteProduct(int id)
+    {
+        try
+        {
+            var success = await _productService.DeleteProductAsync(id);
+
+            if (!success)
+            {
+                return NotFound(new { message = "Service was not deleted." });
+            }
+
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { message = ex.Message });
+        }
+    }
+
     #endregion
 }

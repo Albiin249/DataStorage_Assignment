@@ -36,7 +36,7 @@ const CreateUser = () => {
                 console.log("Allt lyckades");
             } else {
                 const errorData = await res.json();
-                setErrorMessage(errorData.message || "Något gick fel.");
+                setErrorMessage(errorData.message || "Something went wrong, please submit an valid email address.");
             }
         } catch (error) {
             console.error("Fel vid skapande:", error);
@@ -66,7 +66,7 @@ const CreateUser = () => {
                 <div className="create-form">
                     <input type="text" className="input" name="firstName" placeholder="First Name" value={userData.firstName} onChange={handleInputChange} required />
                     <input type="text" className="input" name="lastName" placeholder="Last Name" value={userData.lastName} onChange={handleInputChange} />
-                    <input type="text" className="input" name="email" placeholder="Email" value={userData.email} onChange={handleInputChange} required />
+                    <input type="email" className="input" name="email" placeholder="Email" value={userData.email} onChange={handleInputChange} required />
 
                     {errorMessage && <p className="error-message">{errorMessage}</p>} 
                     <button className="btn btn-back" type="submit">Create User</button>

@@ -4,6 +4,7 @@ using Business.Models;
 using Data.Entities;
 using Data.Repositories;
 using System.Linq.Expressions;
+using System.Text.RegularExpressions;
 
 namespace Business.Services;
 
@@ -12,9 +13,11 @@ public class UserService(UserRepository userRepository) : IUserService
     private readonly UserRepository _userRepository = userRepository;
 
     //CREATE
-    public async Task CreateUserAsync(User userModel)
-    {
-        await _userRepository.BeginTransactionAsync();
+
+public async Task CreateUserAsync(User userModel)
+{
+
+    await _userRepository.BeginTransactionAsync();
         try
         {
             var existingUser = await _userRepository.GetAsync(x => x.Email == userModel.Email);

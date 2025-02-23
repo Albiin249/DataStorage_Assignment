@@ -1,6 +1,8 @@
 ﻿using Business.Helpers;
 using Business.Models;
 using Business.Services;
+using System.ComponentModel.Design;
+
 //using Data.Migrations;
 using System.Text.RegularExpressions;
 
@@ -174,27 +176,33 @@ public class MenuDialogs(CustomerService customerService, ProductService product
                     Console.WriteLine($"ID: {user.Id} - {user.FirstName} {user.LastName}");
                 }
 
-
                 Console.Write("Enter project manager (user ID): ");
-                if (!int.TryParse(Console.ReadLine(), out userId))
+                string input = Console.ReadLine()!;
+
+                if (input!.ToUpper() == "X")
+                {
+                    return; 
+                }
+
+                if (!int.TryParse(input, out userId))
                 {
                     Console.WriteLine("Invalid user ID. Please enter a valid ID or enter 'X' to go back to the main menu.");
-                    if (Console.ReadLine()!.ToUpper() == "X")
-                        return; 
+                    continue; 
                 }
 
                 if (!users.Any(u => u!.Id == userId))
                 {
-                    Console.WriteLine($"Could not found a user with ID: {userId}. Please try again or enter 'X' to go back.");
+                    Console.WriteLine($"Could not find a user with ID: {userId}. Please try again or enter 'X' to go back.");
                     continue; 
                 }
                 else
                 {
-                    break;
+                    break; 
                 }
             }
 
-            
+
+
             int customerId;
             while (true)
             {
@@ -207,7 +215,14 @@ public class MenuDialogs(CustomerService customerService, ProductService product
                 }
 
                 Console.Write("Enter customer ID: ");
-                if (!int.TryParse(Console.ReadLine(), out customerId))
+                string input = Console.ReadLine()!;
+
+                if (input!.ToUpper() == "X")
+                {
+                    return;
+                }
+
+                if (!int.TryParse(input, out customerId))
                 {
                     Console.WriteLine("Invalid Customer ID. Please enter a valid ID or enter 'X' to go back to the main menu.");
                     if (Console.ReadLine()!.ToUpper() == "X")
@@ -236,7 +251,15 @@ public class MenuDialogs(CustomerService customerService, ProductService product
                     Console.WriteLine($"ID: {product.Id} - {product.ProductName}");
                 }
                 Console.Write("Enter the ID of which service fits: ");
-                if (!int.TryParse(Console.ReadLine(), out productId))
+
+                string input = Console.ReadLine()!;
+
+                if (input!.ToUpper() == "X")
+                {
+                    return;
+                }
+
+                if (!int.TryParse(input, out productId))
                 {
                     Console.WriteLine("Invalid Product ID. Please enter a valid ID or enter 'X' to go back to the main menu.");
                     if (Console.ReadLine()!.ToUpper() == "X")
@@ -267,7 +290,15 @@ public class MenuDialogs(CustomerService customerService, ProductService product
 
 
                 Console.Write("Select project status: ");
-                if (!int.TryParse(Console.ReadLine(), out statusId))
+
+                string input = Console.ReadLine()!;
+
+                if (input!.ToUpper() == "X")
+                {
+                    return;
+                }
+
+                if (!int.TryParse(input, out statusId))
                 {
                     Console.WriteLine("Invalid Status ID. Please enter a valid ID or enter 'X' to go back.");
                     if (Console.ReadLine()!.ToUpper() == "X")
@@ -285,6 +316,37 @@ public class MenuDialogs(CustomerService customerService, ProductService product
                 }
             }
 
+            int totalHours;
+            while (true)
+            {
+                Console.Write("\nEnter total hours: ");
+                string input = Console.ReadLine()!;
+
+                if (input!.ToUpper() == "X")
+                {
+                    return;
+                }
+
+                if (int.TryParse(input, out totalHours))
+                {
+                    if (totalHours >= 0) 
+                    {
+                        break; 
+                    }
+                    else
+                    {
+                        Console.WriteLine("Please enter a positive number. Or enter 'X' to go back.");
+                    }
+                    
+                }
+                else
+                {
+                    Console.WriteLine("Please enter a valid number. Or enter 'X' to go back.");
+                }
+
+            }
+            Console.WriteLine($"Total hours entered: {totalHours}");
+
 
             Project project = new()
             {
@@ -295,7 +357,8 @@ public class MenuDialogs(CustomerService customerService, ProductService product
                 UserId = userId, 
                 CustomerId = customerId, 
                 ProductId = productId,
-                StatusId = statusId, 
+                StatusId = statusId,
+                TotalHours = totalHours,
                 ProjectNumber = _projectNumberGenerator.GenerateProjectNumber()
 
             };
@@ -740,6 +803,28 @@ public class MenuDialogs(CustomerService customerService, ProductService product
             break;
         }
 
+        Console.WriteLine($"\nCurrent Total hours: {project.TotalHours}");
+        while (true)
+        {
+            Console.Write("Enter new Totalhours (or enter 'X' to exit): ");
+            var input = Console.ReadLine();
+            if (input.ToUpper() == "X")
+            {
+                return;
+            }
+
+            if (!int.TryParse(input, out int totalHours))
+            {
+                Console.WriteLine("Please enter a valid number.");
+                continue;
+            }
+
+            project.TotalHours = totalHours;
+            break;
+        }
+
+
+
 
         try
         {
@@ -1103,6 +1188,7 @@ public class MenuDialogs(CustomerService customerService, ProductService product
         Console.WriteLine($"Project Status: {status.StatusName}");
         Console.WriteLine($"Project Start date: {project.StartDate}");
         Console.WriteLine($"Project End date: {project.EndDate}");
+        Console.WriteLine($"Project TotalPrice: {project.TotalPrice}");
 
 
 

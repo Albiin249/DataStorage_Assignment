@@ -26,6 +26,7 @@ var services = new ServiceCollection()
 
     .AddScoped<ProjectFactory>()
     .AddScoped<ProjectNumberGenerator>()
+    .AddScoped<CalculatePrice>()
 
     .BuildServiceProvider();
 
