@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Business\Busine
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation.ConsoleApp", "Presentation.ConsoleApp\Presentation.ConsoleApp.csproj", "{0874824B-BC60-432C-985F-5FE0584771FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{3710E8D4-20C6-46C1-AE14-4EC3009C5FE3}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "reactdatastorage.assignment", "ReactDataStorage.Assignment\reactdatastorage.assignment.esproj", "{AFF1B0A5-4582-4393-9D3D-153DEA77A843}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,16 @@ Global
 		{0874824B-BC60-432C-985F-5FE0584771FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0874824B-BC60-432C-985F-5FE0584771FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0874824B-BC60-432C-985F-5FE0584771FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3710E8D4-20C6-46C1-AE14-4EC3009C5FE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3710E8D4-20C6-46C1-AE14-4EC3009C5FE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3710E8D4-20C6-46C1-AE14-4EC3009C5FE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3710E8D4-20C6-46C1-AE14-4EC3009C5FE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFF1B0A5-4582-4393-9D3D-153DEA77A843}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFF1B0A5-4582-4393-9D3D-153DEA77A843}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFF1B0A5-4582-4393-9D3D-153DEA77A843}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{AFF1B0A5-4582-4393-9D3D-153DEA77A843}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFF1B0A5-4582-4393-9D3D-153DEA77A843}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFF1B0A5-4582-4393-9D3D-153DEA77A843}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

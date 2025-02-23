@@ -4,15 +4,10 @@ using Data.Entities;
 
 namespace Business.Factories;
 
-public class ProjectFactory
+public class ProjectFactory(ProjectNumberGenerator projectNumberGenerator)
 {
-    private readonly ProjectNumberGenerator _projectNumberGenerator;
+    private readonly ProjectNumberGenerator _projectNumberGenerator = projectNumberGenerator;
 
-    // DI-konstruktor för att få ProjectNumberGenerator
-    public ProjectFactory(ProjectNumberGenerator projectNumberGenerator)
-    {
-        _projectNumberGenerator = projectNumberGenerator;
-    }
     //Från ProjectModel till Entity
     public ProjectEntity? Create(Project model) => model == null ? null : new()
     {

@@ -240,7 +240,7 @@ public class MenuDialogs(CustomerService customerService, ProductService product
                 {
                     Console.WriteLine("Invalid Product ID. Please enter a valid ID or enter 'X' to go back to the main menu.");
                     if (Console.ReadLine()!.ToUpper() == "X")
-                        return; // Om användaren vill gå tillbaka till huvudmenyn
+                        return; 
                 }
 
                 if (!products.Any(p => p!.Id == productId))
@@ -269,7 +269,7 @@ public class MenuDialogs(CustomerService customerService, ProductService product
                 Console.Write("Select project status: ");
                 if (!int.TryParse(Console.ReadLine(), out statusId))
                 {
-                    Console.WriteLine("Invalid Status ID. Please enter a valid ID or enter 'X' to go back to the main menu.");
+                    Console.WriteLine("Invalid Status ID. Please enter a valid ID or enter 'X' to go back.");
                     if (Console.ReadLine()!.ToUpper() == "X")
                         return; 
                 }
@@ -396,7 +396,7 @@ public class MenuDialogs(CustomerService customerService, ProductService product
             }
             if (!string.IsNullOrWhiteSpace(userEmail) && Regex.IsMatch(userEmail, emailPattern)) //Tog hjälp av ChatGPT här. Koden kollar så att emailen inte är tom och uppfyller regexens krav.
             {
-                break; // Om e-postadressen är giltig, bryt loopen och fortsätt
+                break; 
             }
 
             Console.WriteLine("Invalid email format. Please try again.");
@@ -1177,7 +1177,7 @@ public class MenuDialogs(CustomerService customerService, ProductService product
                 Console.WriteLine($"ID: {project.Id} - Name: {project.Title}");
             }
 
-            Console.Write("\nPlease enter the ID of which project you want to delete ('X' to go back): ");
+            Console.Write("\nPlease enter the ID of which project you want to delete (or enter 'X' to go back): ");
 
             var input = Console.ReadLine();
             if (input?.ToUpper() == "X")
@@ -1242,7 +1242,7 @@ public class MenuDialogs(CustomerService customerService, ProductService product
                 Console.WriteLine($"ID: {customer.Id} - Name: {customer.CustomerName}");
             }
 
-            Console.Write("\nPlease enter the ID of which customer you want to delete ('X' to go back): ");
+            Console.Write("\nPlease enter the ID of which customer you want to delete (or enter 'X' to go back): ");
             var input = Console.ReadLine();
             if (input?.ToUpper() == "X")
                 return;
@@ -1306,7 +1306,7 @@ public class MenuDialogs(CustomerService customerService, ProductService product
                 Console.WriteLine($"ID: {product.Id} - Name: {product.ProductName}");
             }
 
-            Console.Write("\nPlease enter the ID of which service you want to delete ('X' to go back): ");
+            Console.Write("\nPlease enter the ID of which service you want to delete (or enter 'X' to go back): ");
 
             var input = Console.ReadLine();
             if (input?.ToUpper() == "X")
@@ -1371,7 +1371,7 @@ public class MenuDialogs(CustomerService customerService, ProductService product
                 Console.WriteLine($"ID: {user.Id} - Name: {user.FirstName} {user.LastName}");
             }
 
-            Console.Write("\nPlease enter the ID of which user you want to delete ('X' to go back): ");
+            Console.Write("\nPlease enter the ID of which user you want to delete (or enter 'X' to go back): ");
 
             var input = Console.ReadLine();
             if (input?.ToUpper() == "X")
@@ -1436,7 +1436,7 @@ public class MenuDialogs(CustomerService customerService, ProductService product
                 Console.WriteLine($"ID: {status.Id} - Name: {status.StatusName}");
             }
 
-            Console.Write("\nPlease enter the ID of which status you want to delete ('X' to go back): ");
+            Console.Write("\nPlease enter the ID of which status you want to delete (or enter 'X' to go back): ");
 
             var input = Console.ReadLine();
             if (input?.ToUpper() == "X")

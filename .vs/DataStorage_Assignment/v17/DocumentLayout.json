@@ -3,15 +3,20 @@
   "WorkspaceRootPath": "C:\\Projects\\DataStorage_Assignment\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0874824B-BC60-432C-985F-5FE0584771FE}|Presentation.ConsoleApp\\Presentation.ConsoleApp.csproj|c:\\projects\\datastorage_assignment\\presentation.consoleapp\\menudialogs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0874824B-BC60-432C-985F-5FE0584771FE}|Presentation.ConsoleApp\\Presentation.ConsoleApp.csproj|solutionrelative:presentation.consoleapp\\menudialogs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AFF1B0A5-4582-4393-9D3D-153DEA77A843}|ReactDataStorage.Assignment\\reactdatastorage.assignment.esproj|c:\\projects\\datastorage_assignment\\reactdatastorage.assignment\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{AFF1B0A5-4582-4393-9D3D-153DEA77A843}|ReactDataStorage.Assignment\\reactdatastorage.assignment.esproj|solutionrelative:reactdatastorage.assignment\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B0A39AD0-0095-404D-AE7B-365B1FA3C658}|Business\\Business.csproj|c:\\projects\\datastorage_assignment\\business\\models\\project.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B0A39AD0-0095-404D-AE7B-365B1FA3C658}|Business\\Business.csproj|solutionrelative:business\\models\\project.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AFF1B0A5-4582-4393-9D3D-153DEA77A843}|ReactDataStorage.Assignment\\reactdatastorage.assignment.esproj|c:\\projects\\datastorage_assignment\\reactdatastorage.assignment\\src\\components\\projectcreate.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{AFF1B0A5-4582-4393-9D3D-153DEA77A843}|ReactDataStorage.Assignment\\reactdatastorage.assignment.esproj|solutionrelative:reactdatastorage.assignment\\src\\components\\projectcreate.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__PROJECTS_DATASTORAGE_ASSIGNMENT_DATA_DATABASES_LOCAL_DATABASE.MDF/True/SqlTable/dbo.Projects.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+      "AbsoluteMoniker": "D:0:0:{AFF1B0A5-4582-4393-9D3D-153DEA77A843}|ReactDataStorage.Assignment\\reactdatastorage.assignment.esproj|c:\\projects\\datastorage_assignment\\reactdatastorage.assignment\\src\\components\\projects.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{AFF1B0A5-4582-4393-9D3D-153DEA77A843}|ReactDataStorage.Assignment\\reactdatastorage.assignment.esproj|solutionrelative:reactdatastorage.assignment\\src\\components\\projects.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AFF1B0A5-4582-4393-9D3D-153DEA77A843}|ReactDataStorage.Assignment\\reactdatastorage.assignment.esproj|c:\\projects\\datastorage_assignment\\reactdatastorage.assignment\\src\\index.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{AFF1B0A5-4582-4393-9D3D-153DEA77A843}|ReactDataStorage.Assignment\\reactdatastorage.assignment.esproj|solutionrelative:reactdatastorage.assignment\\src\\index.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -21,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -37,60 +42,52 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Project.cs",
-              "DocumentMoniker": "C:\\Projects\\DataStorage_Assignment\\Business\\Models\\Project.cs",
-              "RelativeDocumentMoniker": "Business\\Models\\Project.cs",
-              "ToolTip": "C:\\Projects\\DataStorage_Assignment\\Business\\Models\\Project.cs",
-              "RelativeToolTip": "Business\\Models\\Project.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-19T14:42:38.541Z",
+              "DocumentIndex": 0,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\Projects\\DataStorage_Assignment\\reactdatastorage.assignment\\.gitignore",
+              "RelativeDocumentMoniker": "reactdatastorage.assignment\\.gitignore",
+              "ToolTip": "C:\\Projects\\DataStorage_Assignment\\reactdatastorage.assignment\\.gitignore",
+              "RelativeToolTip": "reactdatastorage.assignment\\.gitignore",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-02-23T15:07:38.58Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MenuDialogs.cs",
-              "DocumentMoniker": "C:\\Projects\\DataStorage_Assignment\\Presentation.ConsoleApp\\MenuDialogs.cs",
-              "RelativeDocumentMoniker": "Presentation.ConsoleApp\\MenuDialogs.cs",
-              "ToolTip": "C:\\Projects\\DataStorage_Assignment\\Presentation.ConsoleApp\\MenuDialogs.cs",
-              "RelativeToolTip": "Presentation.ConsoleApp\\MenuDialogs.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA0AAABFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-19T11:27:16.807Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Orientation": 0,
-      "VerticalTabListWidth": 256,
-      "FloatingWindowState": {
-        "Id": "0ff7ef29-e036-404e-9923-e38c1b533988",
-        "Display": 1,
-        "X": -5,
-        "Y": 55,
-        "Width": 1598,
-        "Height": 982,
-        "WindowState": 2
-      },
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
+              "DocumentIndex": 1,
+              "Title": "ProjectCreate.jsx",
+              "DocumentMoniker": "C:\\Projects\\DataStorage_Assignment\\reactdatastorage.assignment\\src\\components\\ProjectCreate.jsx",
+              "RelativeDocumentMoniker": "reactdatastorage.assignment\\src\\components\\ProjectCreate.jsx",
+              "ToolTip": "C:\\Projects\\DataStorage_Assignment\\reactdatastorage.assignment\\src\\components\\ProjectCreate.jsx",
+              "RelativeToolTip": "reactdatastorage.assignment\\src\\components\\ProjectCreate.jsx",
+              "ViewState": "AgIAAIgAAAAAAAAAAAAmwI8AAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-02-23T15:02:48.821Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "index.css",
+              "DocumentMoniker": "C:\\Projects\\DataStorage_Assignment\\reactdatastorage.assignment\\src\\index.css",
+              "RelativeDocumentMoniker": "reactdatastorage.assignment\\src\\index.css",
+              "ToolTip": "C:\\Projects\\DataStorage_Assignment\\reactdatastorage.assignment\\src\\index.css",
+              "RelativeToolTip": "reactdatastorage.assignment\\src\\index.css",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAAAG4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-02-23T14:47:24.313Z"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "dbo.Projects [Data]",
-              "DocumentMoniker": "ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__PROJECTS_DATASTORAGE_ASSIGNMENT_DATA_DATABASES_LOCAL_DATABASE.MDF/True/SqlTable/dbo.Projects.sql",
-              "ToolTip": "dbo.Projects [Data]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2025-02-19T14:05:08.834Z",
-              "EditorCaption": ""
+              "Title": "Projects.jsx",
+              "DocumentMoniker": "C:\\Projects\\DataStorage_Assignment\\reactdatastorage.assignment\\src\\components\\Projects.jsx",
+              "RelativeDocumentMoniker": "reactdatastorage.assignment\\src\\components\\Projects.jsx",
+              "ToolTip": "C:\\Projects\\DataStorage_Assignment\\reactdatastorage.assignment\\src\\components\\Projects.jsx",
+              "RelativeToolTip": "reactdatastorage.assignment\\src\\components\\Projects.jsx",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAADwAAADPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-02-23T14:29:17.57Z"
             }
           ]
         }

@@ -1,0 +1,111 @@
+body {
+    background-color: lightgray;
+    margin: 0; 
+    height: 100%; 
+}
+
+
+.btn {
+    margin: auto;
+    margin-bottom: 1.5rem;
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: center;
+    width: 20%;
+}
+
+
+
+/* VIEW ALL PROJECTS SIDAN */
+.no-p {
+    display: flex;
+    justify-content: center;
+    
+}
+.project-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+.project-title {
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    font-size: 48px;
+    justify-content: center;
+
+}
+.bold-text {
+    font-weight: bold;
+}
+.admin-link {
+    display: flex;
+    margin-left: .5rem;
+    margin-top: .5rem;
+}
+
+/* CREATE SIDAN */
+.create-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+.error-message {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 10px;
+   
+}
+
+
+.input {
+    width: 20%;
+    margin-bottom: .5rem;
+}
+
+.btn-create {
+    margin-bottom: 0.1rem;
+    margin-top: .5rem;
+}
+.btn-back {
+    margin: 0;
+    margin-top: 0.2rem;
+}
+
+
+/* DETAILS SIDAN */
+
+.project-details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+/* UPDATE SIDAN */
+
+.input-title {
+    margin-bottom: 0;
+    margin-top: .5rem;
+}
+
+
+/* ADMIN SIDAN */
+
+
+.container-admin {
+    margin-top: 5rem;
+}
+.btn-admin {
+    margin-top: .5rem;
+}
+
+.btn-created {
+    margin-bottom: 0;
+}
+.btn-created-back {
+    margin-top: 0.2rem;
+}
