@@ -112,15 +112,15 @@ const ProjectCreate = () => {
                 <div className="create-form">
                     <input type="text" className="input" name="title" placeholder="Title" value={projectData.title} onChange={handleInputChange} required />
                     <input type="text" className="input" name="description" placeholder="Description" value={projectData.description} onChange={handleInputChange} />
-                    <input type="date" className="input" name="startDate" placeholder="Start date, Format: YYYY-MM-DD" value={projectData.startDate} onChange={handleInputChange} required />
-                    <input type="date" className="input" name="endDate" placeholder="End date, Format: YYYY-MM-DD" value={projectData.endDate} onChange={handleInputChange} required />
+                    <input type="date" className="input select" name="startDate" placeholder="Start date, Format: YYYY-MM-DD" value={projectData.startDate} onChange={handleInputChange} required />
+                    <input type="date" className="input select" name="endDate" placeholder="End date, Format: YYYY-MM-DD" value={projectData.endDate} onChange={handleInputChange} required />
                     
 
                     {/*Tog hjälp av ChatGPT för att skapa dessa select elementen, för att skapa en dropdown meny. */}
                     {/*name anger att de fält motsvarar i detta fallet customerId i projectData. */}
                     {/*Onchange handleInputChange, när användaren väljer ett alternativ så körs handleinputchange, vilket uppdaterar projectdata.customerId */}
                     {/*customers.map(customer) går igenom listan customer och skapar ett <option> för varje customer */}
-                    <select name="customerId" className="input" value={projectData.customerId} onChange={handleInputChange} required> 
+                    <select name="customerId" className="input select" value={projectData.customerId} onChange={handleInputChange} required> 
                         <option value="">Select Customer</option>
                         {customers.map((customer) => (
                             <option key={customer.id} value={customer.id}>
@@ -129,7 +129,7 @@ const ProjectCreate = () => {
                         ))}
                     </select> 
 
-                    <select name="statusId" className="input" value={projectData.statusId} onChange={handleInputChange} required>
+                    <select name="statusId" className="input select" value={projectData.statusId} onChange={handleInputChange} required>
                         <option value="">Select Status</option>
                         {statuses.map((status) => (
                             <option key={status.id} value={status.id}>
@@ -138,7 +138,7 @@ const ProjectCreate = () => {
                         ))}
                     </select>
 
-                    <select name="productId" className="input" value={projectData.productId} onChange={handleInputChange} required>
+                    <select name="productId" className="input select" value={projectData.productId} onChange={handleInputChange} required>
                         <option value="">Select Product</option>
                         {products.map((product) => (
                             <option key={product.id} value={product.id}>
@@ -147,7 +147,7 @@ const ProjectCreate = () => {
                         ))}
                     </select>
 
-                    <select name="userId" className="input" value={projectData.userId} onChange={handleInputChange} required>
+                    <select name="userId" className="input select" value={projectData.userId} onChange={handleInputChange} required>
                         <option value="">Select Project Manager</option>
                         {users.map((user) => (
                             <option key={user.id} value={user.id}>

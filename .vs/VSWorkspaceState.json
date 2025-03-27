@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Data",
+    "\\Data\\Contexts",
+    "\\reactdatastorage.assignment",
+    "\\reactdatastorage.assignment\\public",
+    "\\reactdatastorage.assignment\\src",
+    "\\reactdatastorage.assignment\\src\\components",
+    "\\reactdatastorage.assignment\\src\\pages",
+    "\\WebApi",
+    "\\WebApi\\Controllers"
+  ],
+  "SelectedNode": "\\reactdatastorage.assignment\\src\\components\\CreateCustomer.jsx",
+  "PreviewInSolutionExplorer": false
+}

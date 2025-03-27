@@ -1,5 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const Projects = () => {
     const navigate = useNavigate();
@@ -56,7 +58,7 @@ const Projects = () => {
             <Link to="/admin" className="bold-text admin-link">Admin page</Link> 
             <h2 className="project-title">Projects</h2>
 
-            <button onClick={() => navigate("/create")} className="btn">Create a new project</button> 
+            <button onClick={() => navigate("/create")} className="btn"><FontAwesomeIcon icon={faPlus} />Create a new project</button> 
 
             {projectItems.length === 0 ? ( //Tog hjälp av ChatGPT här, den kikar ifall projectItems inte innehåller något, om den inte innehåller något så skrivs No Projects added ut, annars körs map där nere och listar ut projekten.
                 <p className="no-p">No projects added. Add one!</p>
@@ -64,7 +66,7 @@ const Projects = () => {
                 <ul className="project-list">
                     {projectItems.map((project, index) => ( //Tog hjälp av ChatGPT här för att loopa igenom API datan
                         //Listar ut projekten. Tog lite hjälp att skapa statuses.find också, men gjort justeringar.
-                        <li key={project.id || index}>
+                        <li key={project.id || index} className="project-box">
                             <p className="project-p"><span className="bold-text">Project number:</span> {project.projectNumber}</p>
                             <p className="project-p"><span className="bold-text">Title:</span> {project.title}</p>
                             <p className="project-p">
@@ -75,13 +77,13 @@ const Projects = () => {
                             </p>
 
                             <Link to={`/edit/${project.id}`}>
-                                <button>Edit</button>
+                                <button className="btn-menus">Edit</button>
                             </Link>
                             <Link to={`/details/${project.id}`}>
-                                <button>Details</button>
+                                <button className="btn-menus">Details</button>
                             </Link>
 
-                            <button onClick={() => handleDelete(project.id)} >Delete</button>
+                            <button onClick={() => handleDelete(project.id)} className="btn-menus">Delete</button>
 
                         </li>
                     ))}
